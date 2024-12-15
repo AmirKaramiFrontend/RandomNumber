@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🔢 Random number 🔢</title>
+  </head>
+  <style>
+    section {
+      max-width: 1980px;
+      background-color: #f1f1f1;
+      border-radius: 10px;
+      height: 300px;
+      margin: 100px 10px;
+      padding: 20px 10px;
+    }
+
+    * {
+      transition: all 0.2s;
+    }
+
+    h1 {
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    input {
+      border: 0;
+      outline: 0;
+      padding: 5px 10px;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      flex: 1;
+    }
+
+    input:focus {
+      border-color: rgb(0, 255, 255);
+      box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+    }
+
+    button {
+      border: 0;
+      background-color: #f9f9f9;
+      padding: 5px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    button:active {
+      background-color: rgb(157, 247, 247);
+    }
+
+    form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 5px;
+      border: 1px solid #b1b1b1;
+      border-radius: 10px;
+      gap: 10px;
+    }
+
+    .result {
+      margin-top: 10px;
+      border: 1px solid #b1b1b1;
+      height: 200px;
+      width: 100%;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 60px;
+      font-weight: 900;
+      color: #777777;
+    }
+  </style>
+  <body>
+    <section>
+      <h3>Random number</h3>
+      <form>
+        <input type="text" id="range" placeholder="Your range" />
+        <button>Let's go</button>
+      </form>
+
+      <div class="result">0</div>
+    </section>
+
+    <script>
+      const button = document.querySelector('button');
+      const input = document.querySelector('input');
+      const resultBox = document.querySelector('.result');
+
+      button.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (!input.value || isNaN(input.value)) return;
+        let counter = 0;
+        input.setAttribute('disabled', true);
+        button.setAttribute('disabled', true);
+        const loop = setInterval(() => {
+          counter++;
+          resultBox.style.backgroundColor = `rgb(${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)})`;
+          const randomNum = Math.ceil(Math.random() * Number(input.value));
+          resultBox.innerText = randomNum;
+          if (counter === 150) {
+            clearInterval(loop);
+            input.removeAttribute('disabled', true);
+            button.removeAttribute('disabled', true);
+            resultBox.style.backgroundColor = '#f1f1f1';
+          }
+        }, 20);
+      });
+    </script>
+  </body>
+</html>
